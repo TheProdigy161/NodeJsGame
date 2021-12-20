@@ -1,0 +1,5 @@
+<div *ngFor="let line of board; let x = index">
+  <button mat-raised-button *ngFor="let square of line; let y = index" (click)="updateBoard(x, y)">{{board[x][y]}}</button>
+</div>
+
+<div *ngIf="gameResult">Game Result: {{gameResult}}</div>
