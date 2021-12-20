@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   topLeft: number[] = [0,0];
   topMid: number[] = [1,0];
   topRight: number[] = [2,0];
@@ -22,14 +22,22 @@ export class AppComponent {
   winConditions: number[][][] = [];
   board: string[][] = [];
   turnCount: number = 1;
+  gameResult: string | null = null;
+
+  constructor() { }
+
+  ngOnInit(): void {
+    this.createWinConditions();
+    this.createNewTicTacToeBoard();
+  }
 
   // Creates a new tic-tac-toe board.
   createNewTicTacToeBoard(): void {
     // Clear down the board.
     this.board = [
-      ['', '', ''],
-      ['', '', ''],
-      ['', '', ''],
+      ['.', '.', '.'],
+      ['.', '.', '.'],
+      ['.', '.', '.'],
     ];
   }
 
@@ -37,7 +45,7 @@ export class AppComponent {
   createWinConditions(): void {
     this.winConditions = [
       [this.topLeft, this.topMid, this.topRight],    // Top line horizontal
-      [this.midLeft, this.midMid, this.midLeft],     // Middle line horizontal
+      [this.midLeft, this.midMid, this.midRight],    // Middle line horizontal
       [this.botLeft, this.botMid, this.botRight],    // Bottom line horizontal
 
       [this.topLeft, this.midLeft, this.botLeft],    // Left line vertical
@@ -52,11 +60,14 @@ export class AppComponent {
   // Gets the current board piece.
   getCurrentBoardPiece(): string {
     // Assume that player 1 will always be 'X' for the time being.
-    return this.boardPieces[this.turnCount - 1];
+    return this.boardPieces[this.turnCount % 2];
   }
 
   // Update board when a square is selected.
   updateBoard(x: number, y: number): void {
+    if (this.isTileTaken(x, y) || this.isGameOver())
+      return;
+
     // Get board piece based on wich player is making a move.
     let boardPiece: string = this.getCurrentBoardPiece();
 
@@ -66,20 +77,29 @@ export class AppComponent {
     this.turnCount++;
 
     // Check if the game is over.
-    let gameResult: string | null = this.isGameOver();
+    this.checkGameOver();
   }
 
   // Checks if any of the lines on the board meet the win criteria.
-  isGameOver(): string | null {
+  checkGameOver(): void {
     // Loop through each win condition and see if won.
     this.winConditions.forEach(c => {
       this.boardPieces.forEach(bp => {
         if (this.isLineWon(c, bp))
-          return bp;
+        {
+          this.gameResult = bp;
+          console.log(`Win condition: ${JSON.stringify(c)}`);
+          return;
+        }
       })
     });
 
-    return null;
+    if (this.gameResult === null && this.turnCount - 1 === 9)
+      this.gameResult = "Draw";
+  }
+
+  isGameOver(): boolean {
+    return this.gameResult !== null;
   }
 
   // Checks if the win condition provided has been won by the provided piece.
@@ -92,7 +112,11 @@ export class AppComponent {
 
     if (currentBoardPieces.every(x => x === boardPiece))
       return true;
-    
+
     return false;
+  }
+
+  isTileTaken(x: number, y: number): boolean {
+    return this.board[x][y] !== '.';
   }
 }
