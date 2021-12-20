@@ -35,9 +35,9 @@ export class AppComponent implements OnInit {
   createNewTicTacToeBoard(): void {
     // Clear down the board.
     this.board = [
-      ['.', '.', '.'],
-      ['.', '.', '.'],
-      ['.', '.', '.'],
+      ['', '', ''],
+      ['', '', ''],
+      ['', '', ''],
     ];
   }
 
@@ -117,6 +117,6 @@ export class AppComponent implements OnInit {
   }
 
   isTileTaken(x: number, y: number): boolean {
-    return this.board[x][y] !== '.';
+    return this.board[x][y] !== '';
   }
 }

@@ -1,6 +1,12 @@
+$tileSize: 100px;
+
+div {
+  display: flex;
+}
+
 button {
-  min-width: 50px;
-  max-width: 50px;
-  min-height: 50px;
-  max-height: 50px;
+  min-width: $tileSize;
+  max-width: $tileSize;
+  min-height: $tileSize;
+  max-height: $tileSize;
 }
