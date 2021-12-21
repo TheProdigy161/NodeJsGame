@@ -9,14 +9,18 @@ export class TicTacToeService {
 
   constructor(private socket: Socket) { }
 
-  connect(gameCode: string, username: string): boolean {
-    if (gameCode == null || username || null)
+  connect(gameCode: string): boolean {
+    if (gameCode == null)
       return false;
 
     this.socket.connect();
-    this.socket.emit('join-game', { gameCode: gameCode, username: username });
+    this.socket.emit('join-game', gameCode);
 
     return true;
+  }
+
+  makeMove(gameCode: string, x: number, y: number): void {
+    this.socket.emit('make-move', { room: gameCode, x: x, y: y });
   }
 
   setupGameCalls(): void {

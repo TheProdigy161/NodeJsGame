@@ -11,6 +11,7 @@ export class TicTacToeOnlineComponent implements OnInit {
   constructor(private gameService: TicTacToeService) { }
 
   ngOnInit(): void {
-    this.gameService.connect('HDAJSD', 'Ross');
+    this.gameService.connect('HDAJSD');
+    this.gameService.makeMove('HDAJSD', 1, 3);
   }
 }

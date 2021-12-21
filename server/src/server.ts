@@ -27,10 +27,12 @@ io.on('connection', (socket) => {
     });
 
     socket.on('join-game', (room) => {
+        console.log(`Join game called - ${room}`);
         socket.join(room);
     });
 
     socket.on('make-move', (data) => {
+        console.log(`Make move called - ${JSON.stringify(data)}`);
         socket.broadcast.to(data.room).emit(data);
     });
 });
