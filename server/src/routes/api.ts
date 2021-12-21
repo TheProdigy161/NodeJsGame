@@ -1,6 +1,10 @@
 import { Express } from 'express'
 
 export default function (app: Express): void {
+    app.get('/', (req, res) => {
+        res.json({ message: `API called.` });
+    });
+
     app.get('/api', (req, res) => {
         res.json({ message: `API called.` });
     });
