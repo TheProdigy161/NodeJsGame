@@ -26,23 +26,13 @@ io.on('connection', (socket) => {
         console.log('User disconnected');
     });
 
-    socket.on('join-game', (data) => {
-        console.log(`User: ${data.username} has joined socket ${data.gameCode}.`);
+    socket.on('join-game', (room) => {
+        socket.join(room);
     });
 
     socket.on('make-move', (data) => {
-        socket.emit()
+        socket.broadcast.to(data.room).emit(data);
     });
-});
-
-io.use((socket, next) => {
-    const username = socket.handshake.auth.username;
-
-    if (!username)
-        return next(new Error('Invalid username.'));
-
-    socket.username = username;
-    next();
 });
 
 server.listen(PORT, () => {
