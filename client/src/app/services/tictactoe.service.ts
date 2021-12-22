@@ -1,5 +1,7 @@
+import { MoveData } from './../models/moveData';
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
+import { Move } from '../models/move';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +9,7 @@ import { Socket } from 'ngx-socket-io';
 export class TicTacToeService {
   url: string = 'http://localhost:5000';
 
-  constructor(private socket: Socket) { }
+  constructor(public socket: Socket) { }
 
   connect(gameCode: string): boolean {
     if (gameCode == null)
@@ -19,10 +21,7 @@ export class TicTacToeService {
     return true;
   }
 
-  makeMove(gameCode: string, x: number, y: number): void {
-    this.socket.emit('make-move', { room: gameCode, x: x, y: y });
-  }
-
-  setupGameCalls(): void {
+  makeMove(moveData: MoveData): void {
+    this.socket.emit('make-move', moveData);
   }
 }
