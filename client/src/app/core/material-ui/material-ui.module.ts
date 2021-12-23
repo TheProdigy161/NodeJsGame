@@ -7,10 +7,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatGridListModule } from '@angular/material/grid-list'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule,  } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
     MatCardModule,
     MatIconModule,
     MatToolbarModule,
@@ -18,9 +24,13 @@ import { MatGridListModule } from '@angular/material/grid-list'
     MatListModule,
     MatButtonModule,
     DragDropModule,
-    MatGridListModule
+    MatGridListModule,
+    MatFormFieldModule,
   ],
   exports: [
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
     MatCardModule,
     MatIconModule,
     MatToolbarModule,
@@ -28,7 +38,8 @@ import { MatGridListModule } from '@angular/material/grid-list'
     MatListModule,
     MatButtonModule,
     DragDropModule,
-    MatGridListModule
+    MatGridListModule,
+    MatFormFieldModule
   ],
 })
 export class MaterialUiModule {}

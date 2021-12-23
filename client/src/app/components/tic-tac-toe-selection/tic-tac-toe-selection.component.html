@@ -1,0 +1,7 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field>
+    <mat-label>Game Code</mat-label>
+    <input matInput placeholder="The code for the room" formControlName="gameCode" required>
+  </mat-form-field>
+  <button mat-raised-button type="submit">Join</button>
+</form>

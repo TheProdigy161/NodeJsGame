@@ -2,8 +2,8 @@ import { MoveData } from './../../models/moveData';
 import { Move } from './../../models/move';
 import { TicTacToeService } from './../../services/tictactoe.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-const GAME_CODE: string = 'TEST';
 
 @Component({
   selector: 'app-tic-tac-toe-online',
@@ -11,6 +11,8 @@ const GAME_CODE: string = 'TEST';
   styleUrls: ['./tic-tac-toe-online.component.scss']
 })
 export class TicTacToeOnlineComponent implements OnInit {
+  gameCode: string = '';
+
   topLeft: number[] = [0,0];
   topMid: number[] = [1,0];
   topRight: number[] = [2,0];
@@ -30,13 +32,19 @@ export class TicTacToeOnlineComponent implements OnInit {
   gameResult: string | null = null;
   firstMove: boolean = false;
 
-  constructor(private gameService: TicTacToeService) { }
+  constructor(private route: ActivatedRoute, private gameService: TicTacToeService) {
+    this.route.paramMap.subscribe(params => {
+      this.gameCode = params.get('gameCode') ?? '';
+      console.log('Got gameCode.');
+    })
+  }
 
   ngOnInit(): void {
+    console.log('Initialising.');
     this.createWinConditions();
     this.createNewTicTacToeBoard();
 
-    this.gameService.connect(GAME_CODE);
+    this.gameService.connect(this.gameCode);
 
     this.gameService.socket.on('join-room-success', (firstMove: boolean) => {
       this.firstMove = firstMove;
@@ -90,7 +98,7 @@ export class TicTacToeOnlineComponent implements OnInit {
       return;
 
     if (clientMove)
-      this.gameService.makeMove(new MoveData(GAME_CODE, new Move(x, y)));
+      this.gameService.makeMove(new MoveData(this.gameCode, new Move(x, y)));
 
     if (this.isTileTaken(x, y) || this.isGameOver())
       return;

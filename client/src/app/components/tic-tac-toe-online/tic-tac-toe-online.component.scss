@@ -2,6 +2,8 @@ $tileSize: 100px;
 
 div {
   display: flex;
+  background-color: black;
+  max-width: 306px;
 }
 
 button {
@@ -9,4 +11,6 @@ button {
   max-width: $tileSize;
   min-height: $tileSize;
   max-height: $tileSize;
+
+  margin: 1px;
 }
