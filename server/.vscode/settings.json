@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/26daa36a-d4c6-4b65-a0fb-2e2e8d64b802/resourceGroups/RossDev/providers/Microsoft.Web/sites/tic-tac-toe-game-server",
+    "appService.deploySubpath": "."
+}

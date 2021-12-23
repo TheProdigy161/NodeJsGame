@@ -5,7 +5,7 @@ import http from 'http';
 import { Server } from 'socket.io';
 import routes from './routes/_routes';
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 const app = express();
 
 app.use(cors());
@@ -51,5 +51,6 @@ io.on('connection', (socket) => {
 });
 
 server.listen(PORT, () => {
-    console.log(`Server listening on http://localhost:${PORT}`);
+    
+    console.log(`Server listening on ${(server.address() as any).address}:${PORT}`);
 });
