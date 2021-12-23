@@ -36,10 +36,14 @@ export class TicTacToeOnlineComponent implements OnInit {
     this.createWinConditions();
     this.createNewTicTacToeBoard();
 
-    this.gameService.connect('TEST');
+    this.gameService.connect(GAME_CODE);
 
     this.gameService.socket.on('join-room-success', (firstMove: boolean) => {
       this.firstMove = firstMove;
+    });
+
+    this.gameService.socket.on('join-room-failed', () => {
+      console.log("Failed to join room.");
     });
 
     this.gameService.socket.on('make-client-move', (data: Move) => {

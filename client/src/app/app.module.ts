@@ -8,7 +8,7 @@ import { TicTacToeComponent } from './components/tic-tac-toe/tic-tac-toe.compone
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { TicTacToeOnlineComponent } from './components/tic-tac-toe-online/tic-tac-toe-online.component';
 
-const config: SocketIoConfig = { url: 'http://localhost:5000', options: { autoConnect: true } };
+const config: SocketIoConfig = { url: 'https://tic-tac-toe-game-server.azurewebsites.net', options: { autoConnect: true } };
 
 @NgModule({
   declarations: [
