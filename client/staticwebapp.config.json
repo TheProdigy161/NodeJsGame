@@ -1,12 +1,6 @@
 {
-    "routes": [
-        {
-            "route": "/*",
-            "rewrite": "/index.html"
-        }
-    ],
     "navigationFallback": {
-        "rewrite": "/index.html"
+        "rewrite": "index.html"
     },
     "mimeTypes": {
         ".json": "text/json"
