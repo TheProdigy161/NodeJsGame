@@ -39,7 +39,12 @@ io.on('connection', (socket) => {
             await socket.emit('join-room-success', sockets.length === 0);
         } else {
             await socket.emit('join-room-failed', null);
-        }    
+        }
+
+        // After last player has joined, output that the room is full.
+        if (sockets.length === 2) {
+            socket.to(room).emit('room-full');
+        }
     });
 
     socket.on('make-move', (data: MoveData) => {
