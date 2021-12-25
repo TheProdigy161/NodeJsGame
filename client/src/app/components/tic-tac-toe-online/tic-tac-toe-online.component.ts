@@ -35,7 +35,7 @@ export class TicTacToeOnlineComponent implements OnInit {
   constructor(private route: ActivatedRoute, private gameService: TicTacToeService) {
     this.route.paramMap.subscribe(params => {
       this.gameCode = params.get('gameCode') ?? '';
-      console.log('Got gameCode.');
+      console.log(`Got gameCode ${this.gameCode}.`);
     })
   }
 
