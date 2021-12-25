@@ -2,7 +2,7 @@
   <form [formGroup]="form" (ngSubmit)="submit()">
     <mat-form-field>
       <mat-label>Game Code</mat-label>
-      <input matInput placeholder="The code for the room" formControlName="gameCode" onkeypress="return event.charCode != 32" required>
+      <input matInput placeholder="The code for the room" formControlName="gameCode" (keypress)="checkContent($event)" required>
     </mat-form-field>
     <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Join</button>
   </form>

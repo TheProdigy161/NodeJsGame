@@ -21,7 +21,19 @@ export class TicTacToeSelectionComponent implements OnInit {
     const gameCode: string | null = this.form.get('gameCode')?.value;
 
     if (gameCode != null) {
-      this.router.navigate(['game', gameCode]);
+      this.router.navigate(['game', gameCode.toUpperCase()]);
     }
+  }
+
+  checkContent(event: KeyboardEvent): boolean {
+    const regexPattern = new RegExp('[a-zA-Z]');
+    
+    if (event.key === " ")
+      return false;
+
+    if (!regexPattern.test(event.key))
+      return false;
+
+    return true;
   }
 }

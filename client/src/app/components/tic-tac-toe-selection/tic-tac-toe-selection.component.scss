@@ -9,6 +9,10 @@ form {
     
     mat-form-field {
         width: 100%;
+
+        input {
+            text-transform: uppercase;
+        }
     }
 
     button {
