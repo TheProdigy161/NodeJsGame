@@ -2,7 +2,7 @@ import { MoveData } from './../../models/moveData';
 import { Move } from './../../models/move';
 import { TicTacToeService } from './../../services/tictactoe.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -31,8 +31,10 @@ export class TicTacToeOnlineComponent implements OnInit {
   turnCount: number = 1;
   gameResult: string | null = null;
   firstMove: boolean = false;
+  joinedRoom: boolean = false;
+  isLoading: boolean = true;
 
-  constructor(private route: ActivatedRoute, private gameService: TicTacToeService) {
+  constructor(private route: ActivatedRoute, private router: Router, private gameService: TicTacToeService) {
     this.route.paramMap.subscribe(params => {
       this.gameCode = params.get('gameCode') ?? '';
       console.log(`Got gameCode ${this.gameCode}.`);
@@ -44,14 +46,20 @@ export class TicTacToeOnlineComponent implements OnInit {
     this.createWinConditions();
     this.createNewTicTacToeBoard();
 
-    this.gameService.connect(this.gameCode);
+    this.gameService.joinGame(this.gameCode);
 
     this.gameService.socket.on('join-room-success', (firstMove: boolean) => {
       this.firstMove = firstMove;
+      this.joinedRoom = true;
     });
 
     this.gameService.socket.on('join-room-failed', () => {
       console.log("Failed to join room.");
+      this.router.navigateByUrl("/");
+    });
+
+    this.gameService.socket.on('room-full', () => {
+      this.isLoading = false;
     });
 
     this.gameService.socket.on('make-client-move', (data: Move) => {

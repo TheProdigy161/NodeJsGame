@@ -1,5 +1,12 @@
-<div *ngFor="let line of board; let x = index">
-  <button mat-flat-button *ngFor="let square of line; let y = index" (click)="updateBoard(x, y, true)">{{board[x][y]}}</button>
+<div *ngIf="!isLoading">
+  <div *ngIf="joinedRoom">
+    <div *ngFor="let line of board; let x = index">
+      <button mat-flat-button *ngFor="let square of line; let y = index" (click)="updateBoard(x, y, true)">{{board[x][y]}}</button>
+    </div>
+    
+    <div *ngIf="gameResult">Game Result: {{gameResult}}</div>
+  </div>
 </div>
-
-<div *ngIf="gameResult">Game Result: {{gameResult}}</div>
+<div *ngIf="isLoading">
+  Loading...
+</div>
