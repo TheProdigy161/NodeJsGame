@@ -1,0 +1,17 @@
+.selectionDiv {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+}
+
+form {
+    align-self: center;
+    
+    mat-form-field {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+}
