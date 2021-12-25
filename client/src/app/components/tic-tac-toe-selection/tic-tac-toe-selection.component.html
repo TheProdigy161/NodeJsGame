@@ -2,7 +2,7 @@
   <form [formGroup]="form" (ngSubmit)="submit()">
     <mat-form-field>
       <mat-label>Game Code</mat-label>
-      <input matInput autocomplete="false" placeholder="The code for the room" formControlName="gameCode" (keypress)="checkContent($event)" required>
+      <input matInput autocomplete="false" placeholder="e.g ABCDEF" formControlName="gameCode" (keypress)="checkContent($event)" required>
     </mat-form-field>
     <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Join</button>
   </form>
