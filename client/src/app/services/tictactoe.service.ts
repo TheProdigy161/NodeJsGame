@@ -14,7 +14,8 @@ export class TicTacToeService {
   joinGame(gameCode: string): boolean {
     if (gameCode == null)
       return false;
-      
+    
+    this.socket.connect();
     this.socket.emit('join-game', gameCode);
 
     return true;
