@@ -1,4 +1,4 @@
-<div *ngIf="!isLoading">
+<div class="board" *ngIf="!isLoading">
   <div *ngIf="joinedRoom">
     <div *ngFor="let line of board; let x = index">
       <button mat-flat-button *ngFor="let square of line; let y = index" (click)="updateBoard(x, y, true)">{{board[x][y]}}</button>
