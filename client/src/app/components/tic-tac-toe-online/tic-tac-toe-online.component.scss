@@ -1,9 +1,17 @@
 $tileSize: 100px;
 
+.boardContainer {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+}
+
 .board {
   display: flex;
+  align-self: center;
   background-color: black;
   max-width: 306px;
+  max-height: 306px;
 }
 
 button {
