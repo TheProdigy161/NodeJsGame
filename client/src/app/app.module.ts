@@ -10,7 +10,7 @@ import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { TicTacToeOnlineComponent } from './components/tic-tac-toe-online/tic-tac-toe-online.component';
 import { TicTacToeSelectionComponent } from './components/tic-tac-toe-selection/tic-tac-toe-selection.component';
 
-const config: SocketIoConfig = { url: 'https://tic-tac-toe-game-server.azurewebsites.net', options: { autoConnect: true } };
+const config: SocketIoConfig = { url: 'https://tic-tac-toe-game-server.azurewebsites.net', options: { autoConnect: false } };
 
 @NgModule({
   declarations: [

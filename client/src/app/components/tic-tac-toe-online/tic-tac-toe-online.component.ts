@@ -49,6 +49,7 @@ export class TicTacToeOnlineComponent implements OnInit {
     this.gameService.joinGame(this.gameCode);
 
     this.gameService.socket.on('join-room-success', (firstMove: boolean) => {
+      console.log("Joined room.");
       this.firstMove = firstMove;
       this.joinedRoom = true;
     });
@@ -59,10 +60,12 @@ export class TicTacToeOnlineComponent implements OnInit {
     });
 
     this.gameService.socket.on('room-full', () => {
+      console.log("Room full.");
       this.isLoading = false;
     });
 
     this.gameService.socket.on('make-client-move', (data: Move) => {
+      console.log("Making move.");
       // Update board when move is made.
       this.updateBoard(data.x, data.y);
     });
