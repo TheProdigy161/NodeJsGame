@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
 
         // After last player has joined, output that the room is full.
         if (sockets.length === 1) {
-            socket.to(room).emit('room-full');
+            io.to(room).emit('room-full');
         }
     });
 
