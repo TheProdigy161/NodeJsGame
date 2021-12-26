@@ -169,4 +169,11 @@ export class TicTacToeOnlineComponent implements OnInit {
   isClientsTurn(): boolean {
     return (this.turnCount % 2 === 0) === this.firstMove;
   }
+
+  getTurnDisplay(): string {
+    if (this.isClientsTurn())
+      return 'Your turn.';
+    
+    return 'Opponents turn.';
+  }
 }

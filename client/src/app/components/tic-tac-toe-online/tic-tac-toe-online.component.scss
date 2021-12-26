@@ -1,8 +1,19 @@
 $tileSize: 100px;
 
+.infoContainer {
+  display: grid;
+  height: 10%;
+  justify-content: center;
+}
+
+.info {
+  align-self: center;
+  text-align: center;
+}
+
 .boardContainer {
   display: flex;
-  height: 100%;
+  height: 90%;
   justify-content: center;
 }
 

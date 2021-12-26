@@ -1,11 +1,13 @@
+<div class="infoContainer">
+  <div class="info" *ngIf="!isLoading">{{ getTurnDisplay() }}</div>
+  <div class="info" *ngIf="isLoading">Loading...</div>
+  <div class="info" *ngIf="gameResult">Game Result: {{gameResult}}</div>
+</div>
+
 <div class="boardContainer">
   <div class="board" *ngIf="!isLoading && joinedRoom">
     <div *ngFor="let line of board; let x = index">
       <button mat-flat-button *ngFor="let square of line; let y = index" (click)="updateBoard(x, y, true)">{{board[x][y]}}</button>
     </div>
-  </div>
-  <div *ngIf="gameResult">Game Result: {{gameResult}}</div>
-  <div *ngIf="isLoading">
-    Loading...
   </div>
 </div>
