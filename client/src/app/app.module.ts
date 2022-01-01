@@ -8,7 +8,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TicTacToeComponent } from './components/tic-tac-toe/tic-tac-toe.component';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { TicTacToeOnlineComponent } from './components/tic-tac-toe-online/tic-tac-toe-online.component';
-import { TicTacToeSelectionComponent } from './components/tic-tac-toe-selection/tic-tac-toe-selection.component';
+import { TicTacToeCreateRoomComponent } from './components/tic-tac-toe-create-room/tic-tac-toe-create-room.component';
+import { TicTacToeRoomListComponent } from './components/tic-tac-toe-room-list/tic-tac-toe-room-list.component';
+import { TicTacToeListItemComponent } from './components/tic-tac-toe-room-list/tic-tac-toe-list-item/tic-tac-toe-list-item.component';
 
 const config: SocketIoConfig = { url: 'https://tic-tac-toe-game-server.azurewebsites.net', options: { autoConnect: false } };
 
@@ -17,7 +19,9 @@ const config: SocketIoConfig = { url: 'https://tic-tac-toe-game-server.azurewebs
     AppComponent,
     TicTacToeComponent,
     TicTacToeOnlineComponent,
-    TicTacToeSelectionComponent
+    TicTacToeCreateRoomComponent,
+    TicTacToeRoomListComponent,
+    TicTacToeListItemComponent
   ],
   imports: [
     BrowserModule,

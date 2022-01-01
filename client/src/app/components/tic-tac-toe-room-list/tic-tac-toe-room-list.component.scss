@@ -1,0 +1,14 @@
+.listContainer {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+mat-card {
+    width: 40%;
+    align-self: center;
+}
+
+app-tic-tac-toe-list-item {
+    width: 100%;
+}

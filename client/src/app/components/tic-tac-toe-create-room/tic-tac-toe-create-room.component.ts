@@ -3,11 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-tic-tac-toe-selection',
-  templateUrl: './tic-tac-toe-selection.component.html',
-  styleUrls: ['./tic-tac-toe-selection.component.scss']
+  selector: 'app-tic-tac-toe-create-room',
+  templateUrl: './tic-tac-toe-create-room.component.html',
+  styleUrls: ['./tic-tac-toe-create-room.component.scss']
 })
-export class TicTacToeSelectionComponent implements OnInit {
+export class TicTacToeCreateRoomComponent implements OnInit {
   form: FormGroup = new FormGroup({
     gameCode: new FormControl('', Validators.required)
   });
@@ -21,7 +21,7 @@ export class TicTacToeSelectionComponent implements OnInit {
     const gameCode: string | null = this.form.get('gameCode')?.value;
 
     if (gameCode != null) {
-      this.router.navigate(['game', gameCode.toUpperCase()]);
+      this.router.navigate(['tictactoe/game', gameCode.toUpperCase()]);
     }
   }
 
