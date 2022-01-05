@@ -11,20 +11,6 @@ export class DummyDb {
             this.rooms.push(room);
     }
 
-    // Removes a room by its name.
-    removeRoom(roomName: string) {
-        const foundRoomIndex: number = this.rooms.findIndex(x => x.name === roomName);
-        
-        if (foundRoomIndex !== - 1)
-            this.rooms.splice(foundRoomIndex, 1);
-
-        const playersInRoom: Player[] = this.players.filter(x => x.currentRoom === roomName);
-
-        for (let i = 0; i < playersInRoom.length; i++) {
-
-        }
-    }
-
     // Adds a player to the db.
     addPlayer(newPlayer: Player): string {
         if (this.players.findIndex(x => x.id === newPlayer.id) === -1)
@@ -42,15 +28,44 @@ export class DummyDb {
     addPlayerToRoom(playerId: string, roomName: string) {
         const foundPlayer: Player | null = this.players.find(x => x.id === playerId) ?? null;
 
-        if (foundPlayer !== null)
-            foundPlayer.currentRoom = roomName;
+        if (foundPlayer === null)
+            return;
+
+        const foundRoomIndex: number = this.rooms.findIndex(x => x.name === roomName);
+
+        if (foundRoomIndex !== -1)
+            this.rooms[foundRoomIndex].players.push(foundPlayer);
     }
 
     // Removes a player by its id.
     removePlayer(playerId: string) {
+        // Remove player from room.
+        const foundRoom: Room | null = this.rooms.find(x => x.players.map(x => x.id).includes(playerId)) ?? null;
+        
+        if (foundRoom !== null) {
+            const foundRoomIndex: number = this.rooms.findIndex(x => x.name === foundRoom.name);
+            const playerIndex: number = foundRoom.players.findIndex(x => x.id === playerId);
+
+            if (playerIndex !== -1)
+                foundRoom.players.splice(playerIndex, 1);
+            
+            // Update room if still players.
+            if (foundRoom.players.length !== 0)
+                this.rooms[foundRoomIndex] = foundRoom;
+            // Remove room
+            else
+                this.rooms.splice(foundRoomIndex, 1);
+        }
+        
+        // Remove player.
         const foundPlayerIndex: number = this.players.findIndex(x => x.id === playerId);
         
         if (foundPlayerIndex !== - 1)
             this.players.splice(foundPlayerIndex, 1);
+    }
+
+    // Gets all rooms currently stored in the db.
+    getRooms(): Room[] {
+        return this.rooms;
     }
 }

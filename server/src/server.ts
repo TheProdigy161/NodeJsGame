@@ -14,7 +14,7 @@ const app = express();
 const db = new DummyDb();
 
 app.use(cors());
-routes(app);
+routes(app, db);
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -30,7 +30,11 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         console.log('User disconnected');
-        db.removeRoom(socket.id);
+        db.removePlayer(socket.id);
+    });
+    
+    socket.on('get-game-list', () => {
+        socket.emit('got-game-list', db.getRooms());
     });
 
     socket.on('join-game', async (room) => {
@@ -42,11 +46,11 @@ io.on('connection', (socket) => {
 
         // If the number of sockets is less than 2 then join, otherwise emit error.
         if (sockets.length < 2) {
-            db.addRoom(new Room(room));
-            db.addPlayerToRoom(socket.id, room);
-
             await socket.join(room);
             await socket.emit('join-room-success', sockets.length === 0);
+
+            db.addRoom(new Room(room));
+            db.addPlayerToRoom(socket.id, room);
         } else {
             await socket.emit('join-room-failed', null);
         }

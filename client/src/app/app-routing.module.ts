@@ -5,8 +5,8 @@ import { TicTacToeOnlineComponent } from './components/tic-tac-toe-online/tic-ta
 import { TicTacToeRoomListComponent } from './components/tic-tac-toe-room-list/tic-tac-toe-room-list.component';
 
 const routes: Routes = [
-  // { path: 'tictactoe', component: TicTacToeRoomListComponent },
-  { path: 'tictactoe/game', component: TicTacToeCreateRoomComponent },
+  { path: 'tictactoe', component: TicTacToeRoomListComponent },
+  // { path: 'tictactoe/game', component: TicTacToeCreateRoomComponent },
   { path: 'tictactoe/game/:gameCode', component: TicTacToeOnlineComponent },
   { path: '**', redirectTo: 'tictactoe' },
 ];

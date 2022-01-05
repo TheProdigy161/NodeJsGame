@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Room } from 'src/app/models/room';
 
 @Component({
   selector: 'app-tic-tac-toe-list-item',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tic-tac-toe-list-item.component.scss']
 })
 export class TicTacToeListItemComponent implements OnInit {
+  @Input()
+  room: Room | null = null;
 
   constructor() { }
 
