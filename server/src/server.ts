@@ -1,12 +1,17 @@
+import { DummyDb } from './dummyDb';
 import { MoveData } from './models/moveData';
 import express from 'express';
 import cors from 'cors';
 import http from 'http';
 import { Server } from 'socket.io';
 import routes from './routes/_routes';
+import { Player } from './models/player';
+import { GenerateRandomName } from './nameRandomizer';
+import { Room } from './models/room';
 
 const PORT = process.env.PORT || 5000;
 const app = express();
+const db = new DummyDb();
 
 app.use(cors());
 routes(app);
@@ -21,9 +26,11 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
     console.log('User connected.');
+    db.addPlayer(new Player(socket.id, GenerateRandomName()));
 
     socket.on('disconnect', () => {
         console.log('User disconnected');
+        db.removeRoom(socket.id);
     });
 
     socket.on('join-game', async (room) => {
@@ -35,6 +42,9 @@ io.on('connection', (socket) => {
 
         // If the number of sockets is less than 2 then join, otherwise emit error.
         if (sockets.length < 2) {
+            db.addRoom(new Room(room));
+            db.addPlayerToRoom(socket.id, room);
+
             await socket.join(room);
             await socket.emit('join-room-success', sockets.length === 0);
         } else {
