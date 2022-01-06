@@ -7,7 +7,7 @@
 
     <div matColumnDef="count">
       <mat-header-cell *matHeaderCellDef class="col">Player count</mat-header-cell>
-      <mat-cell *matCellDef="let room" class="col"> {{room.name}} </mat-cell>
+      <mat-cell *matCellDef="let room" class="col"> {{room.players.length}} / 2 </mat-cell>
     </div>
 
     <div matColumnDef="action">
@@ -17,7 +17,7 @@
         </button>
       </mat-header-cell>
       <mat-cell *matCellDef="let room" class="actionCol">
-        <button mat-icon-button color="primary" (click)="joinGame(room.name)">
+        <button mat-icon-button color="primary" [disabled]="isJoinDisabled(room)" (click)="joinGame(room.name)">
           <mat-icon>play_arrow</mat-icon>
         </button>
       </mat-cell>

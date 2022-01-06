@@ -29,4 +29,8 @@ export class TicTacToeRoomListComponent implements OnInit {
   joinGame(gameCode: string): void {
     this.router.navigate(['tictactoe/game', gameCode.toUpperCase()]);
   }
+
+  isJoinDisabled(room: Room): boolean {
+    return room.players.length === 2
+  }
 }
