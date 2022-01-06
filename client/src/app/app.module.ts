@@ -11,7 +11,7 @@ import { TicTacToeOnlineComponent } from './components/tic-tac-toe-online/tic-ta
 import { TicTacToeCreateRoomComponent } from './components/tic-tac-toe-create-room/tic-tac-toe-create-room.component';
 import { TicTacToeRoomListComponent } from './components/tic-tac-toe-room-list/tic-tac-toe-room-list.component';
 
-const config: SocketIoConfig = { url: 'http://localhost:5000/', options: { autoConnect: false } };
+const config: SocketIoConfig = { url: 'https://tic-tac-toe-game-server.azurewebsites.net', options: { autoConnect: false } };
 
 @NgModule({
   declarations: [
