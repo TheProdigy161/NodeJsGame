@@ -7,8 +7,6 @@ import { Room } from '../models/room';
   providedIn: 'root'
 })
 export class TicTacToeService {
-  url: string = 'http://localhost:5000';
-
   constructor(public socket: Socket) { }
 
   joinGame(gameCode: string): boolean {
@@ -26,6 +24,7 @@ export class TicTacToeService {
   }
 
   getGameList(): void {
+    this.socket.connect();
     this.socket.emit('get-game-list');
   }
 }

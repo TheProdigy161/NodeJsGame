@@ -1,6 +1,7 @@
 import { Room } from './../../models/room';
 import { TicTacToeService } from './../../services/tictactoe.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tic-tac-toe-room-list',
@@ -8,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tic-tac-toe-room-list.component.scss']
 })
 export class TicTacToeRoomListComponent implements OnInit {
+  displayedColumns: string[] = [ 'name', 'count', 'action'];
   gameList: Room[] = [];
 
-  constructor(private ticTacToeService: TicTacToeService) { }
+  constructor(private ticTacToeService: TicTacToeService, private router: Router) { }
 
   ngOnInit(): void {
     this.ticTacToeService.socket.on('got-game-list', (data: Room[]) => {
@@ -20,4 +22,11 @@ export class TicTacToeRoomListComponent implements OnInit {
     this.ticTacToeService.getGameList();
   }
 
+  createGame(): void {
+    this.router.navigate(['tictactoe/createGame']);
+  }
+
+  joinGame(gameCode: string): void {
+    this.router.navigate(['tictactoe/game', gameCode.toUpperCase()]);
+  }
 }

@@ -6,7 +6,7 @@ import { TicTacToeRoomListComponent } from './components/tic-tac-toe-room-list/t
 
 const routes: Routes = [
   { path: 'tictactoe', component: TicTacToeRoomListComponent },
-  // { path: 'tictactoe/game', component: TicTacToeCreateRoomComponent },
+  { path: 'tictactoe/createGame', component: TicTacToeCreateRoomComponent },
   { path: 'tictactoe/game/:gameCode', component: TicTacToeOnlineComponent },
   { path: '**', redirectTo: 'tictactoe' },
 ];

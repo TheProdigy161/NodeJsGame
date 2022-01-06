@@ -25,16 +25,18 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket) => {
-    console.log('User connected.');
-    db.addPlayer(new Player(socket.id, GenerateRandomName()));
+    const newName: string = GenerateRandomName();
+    console.log(`User connected - ${newName}`);
+    db.addPlayer(new Player(socket.id, newName));
 
     socket.on('disconnect', () => {
-        console.log('User disconnected');
+        console.log(`User disconnected - ${newName}`);
         db.removePlayer(socket.id);
     });
     
     socket.on('get-game-list', () => {
-        socket.emit('got-game-list', db.getRooms());
+        console.log('Calling get-game-list.');
+        io.sockets.emit('got-game-list', db.getRooms());
     });
 
     socket.on('join-game', async (room) => {
@@ -59,6 +61,8 @@ io.on('connection', (socket) => {
         if (sockets.length === 1) {
             io.to(room).emit('room-full');
         }
+
+        await io.emit('got-game-list', db.getRooms());
     });
 
     socket.on('make-move', (data: MoveData) => {

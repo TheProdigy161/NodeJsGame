@@ -10,6 +10,7 @@ import { MatGridListModule } from '@angular/material/grid-list'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule,  } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [],
@@ -26,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
     DragDropModule,
     MatGridListModule,
     MatFormFieldModule,
+    MatTableModule,
   ],
   exports: [
     FormsModule,
@@ -39,7 +41,8 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     DragDropModule,
     MatGridListModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatTableModule
   ],
 })
 export class MaterialUiModule {}
