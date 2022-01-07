@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-tic-tac-toe',
-  templateUrl: './tic-tac-toe.component.html',
-  styleUrls: ['./tic-tac-toe.component.scss']
+  selector: 'app-tic-tac-toe-offline',
+  templateUrl: './tic-tac-toe-offline.component.html',
+  styleUrls: ['./tic-tac-toe-offline.component.scss']
 })
 export class TicTacToeComponent implements OnInit {
   topLeft: number[] = [0,0];
