@@ -7,7 +7,7 @@
 <div class="boardContainer">
   <div class="board" *ngIf="!isLoading && joinedRoom">
     <div *ngFor="let line of board; let x = index">
-      <button mat-flat-button *ngFor="let square of line; let y = index" (click)="updateBoard(x, y, true)">{{board[x][y]}}</button>
+      <button mat-flat-button [disableRipple]="true" *ngFor="let square of line; let y = index" (click)="updateBoard(x, y, true)">{{board[x][y]}}</button>
     </div>
   </div>
 </div>
