@@ -1,0 +1,26 @@
+.listContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.listElement {
+  min-width: 40%;
+  align-self: center;
+}
+
+.noRooms {
+  min-width: 40%;
+  background-color: white;
+  align-self: center;
+  text-align: center;
+}
+
+.col {
+	min-width: 45%;
+}
+
+.actionCol {
+	min-width: 5%;
+}

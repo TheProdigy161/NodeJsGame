@@ -1,5 +1,5 @@
 <div class="listContainer">
-  <mat-table [dataSource]="gameList" class="mat-elevation-z8">
+  <mat-table [dataSource]="gameList" class="mat-elevation-z8 listElement">
     <div matColumnDef="name">
       <mat-header-cell *matHeaderCellDef class="col">Room name</mat-header-cell>
       <mat-cell *matCellDef="let room" class="col"> {{room.name}} </mat-cell>
@@ -27,5 +27,5 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
-  <div *ngIf="gameList.length === 0" class="noRooms">No games found.</div>
+  <div *ngIf="gameList.length === 0" class="noRooms mat-elevation-z8">No games found.</div>
 </div>

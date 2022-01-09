@@ -2,13 +2,13 @@ import { TicTacToeCreateRoomComponent } from './components/tic-tac-toe/tic-tac-t
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TicTacToeOnlineComponent } from './components/tic-tac-toe/tic-tac-toe-online/tic-tac-toe-online.component';
-import { TicTacToeRoomListComponent } from './components/tic-tac-toe/tic-tac-toe-room-list/tic-tac-toe-room-list.component';
+import { RoomListComponent } from './components/game/room-list.component';
 
 const routes: Routes = [
-  { path: 'tictactoe', component: TicTacToeRoomListComponent },
-  { path: 'tictactoe/createGame', component: TicTacToeCreateRoomComponent },
-  { path: 'tictactoe/game/:gameCode', component: TicTacToeOnlineComponent },
-  { path: '**', redirectTo: 'tictactoe' },
+  { path: 'game', component: RoomListComponent },
+  { path: 'game/createGame', component: TicTacToeCreateRoomComponent },
+  { path: 'game/:gameCode', component: TicTacToeOnlineComponent },
+  { path: '**', redirectTo: 'game' },
 ];
 
 @NgModule({

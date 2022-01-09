@@ -21,13 +21,13 @@ export class TicTacToeCreateRoomComponent implements OnInit {
     const gameCode: string | null = this.form.get('gameCode')?.value;
 
     if (gameCode != null) {
-      this.router.navigate(['tictactoe/game', gameCode.toUpperCase()]);
+      this.router.navigate(['game', gameCode.toUpperCase()]);
     }
   }
 
   checkContent(event: KeyboardEvent): boolean {
     const regexPattern = new RegExp('[a-zA-Z]');
-    
+
     if (event.key === " ")
       return false;
 

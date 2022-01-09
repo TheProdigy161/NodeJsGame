@@ -1,3 +1,4 @@
+import { GameService } from './../../../services/game.service';
 import { MoveData } from '../../../models/moveData';
 import { Move } from '../../../models/move';
 import { TicTacToeService } from '../../../services/tictactoe.service';
@@ -34,7 +35,7 @@ export class TicTacToeOnlineComponent implements OnInit {
   joinedRoom: boolean = false;
   isLoading: boolean = true;
 
-  constructor(private route: ActivatedRoute, private router: Router, private gameService: TicTacToeService) {
+  constructor(private route: ActivatedRoute, private router: Router, private gameService: GameService, private ticTacToeService: TicTacToeService) {
     this.route.paramMap.subscribe(params => {
       this.gameCode = params.get('gameCode') ?? '';
       console.log(`Got gameCode ${this.gameCode}.`);
@@ -109,7 +110,7 @@ export class TicTacToeOnlineComponent implements OnInit {
       return;
 
     if (clientMove)
-      this.gameService.makeMove(new MoveData(this.gameCode, new Move(x, y)));
+      this.ticTacToeService.makeMove(new MoveData(this.gameCode, new Move(x, y)));
 
     if (this.isTileTaken(x, y) || this.isGameOver())
       return;
