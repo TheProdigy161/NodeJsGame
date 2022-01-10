@@ -3,11 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-tic-tac-toe-create-room',
-  templateUrl: './tic-tac-toe-create-room.component.html',
-  styleUrls: ['./tic-tac-toe-create-room.component.scss']
+  selector: 'app-create-room',
+  templateUrl: './create-room.component.html',
+  styleUrls: ['./create-room.component.scss']
 })
-export class TicTacToeCreateRoomComponent implements OnInit {
+export class CreateRoomComponent implements OnInit {
   form: FormGroup = new FormGroup({
     gameCode: new FormControl('', Validators.required)
   });
