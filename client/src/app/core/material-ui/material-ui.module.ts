@@ -11,6 +11,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule,  } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -28,6 +30,8 @@ import { MatTableModule } from '@angular/material/table';
     MatGridListModule,
     MatFormFieldModule,
     MatTableModule,
+    MatSelectModule,
+    MatOptionModule,
   ],
   exports: [
     FormsModule,
@@ -42,7 +46,9 @@ import { MatTableModule } from '@angular/material/table';
     DragDropModule,
     MatGridListModule,
     MatFormFieldModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule,
+    MatOptionModule,
   ],
 })
 export class MaterialUiModule {}

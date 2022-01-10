@@ -4,6 +4,7 @@ import { Move } from '../../../models/move';
 import { TicTacToeService } from '../../../services/tictactoe.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Room } from 'src/app/models/room';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./tic-tac-toe-online.component.scss']
 })
 export class TicTacToeOnlineComponent implements OnInit {
-  gameCode: string = '';
+  room: Room;
 
   topLeft: number[] = [0,0];
   topMid: number[] = [1,0];
@@ -37,8 +38,11 @@ export class TicTacToeOnlineComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private gameService: GameService, private ticTacToeService: TicTacToeService) {
     this.route.paramMap.subscribe(params => {
-      this.gameCode = params.get('gameCode') ?? '';
-      console.log(`Got gameCode ${this.gameCode}.`);
+      const roomData = params.get('room');
+      if (roomData)
+        this.room =  JSON.parse(roomData);
+
+      console.log(`Got gameCode ${this.room.name}.`);
     })
   }
 
@@ -47,7 +51,7 @@ export class TicTacToeOnlineComponent implements OnInit {
     this.createWinConditions();
     this.createNewTicTacToeBoard();
 
-    this.gameService.joinGame(this.gameCode);
+    this.gameService.joinGame();
 
     this.gameService.socket.on('join-room-success', (firstMove: boolean) => {
       console.log("Joined room.");
@@ -110,7 +114,7 @@ export class TicTacToeOnlineComponent implements OnInit {
       return;
 
     if (clientMove)
-      this.ticTacToeService.makeMove(new MoveData(this.gameCode, new Move(x, y)));
+      this.ticTacToeService.makeMove(new MoveData(this.room.name, new Move(x, y)));
 
     if (this.isTileTaken(x, y) || this.isGameOver())
       return;

@@ -5,6 +5,11 @@
       <mat-cell *matCellDef="let room" class="col"> {{room.name}} </mat-cell>
     </div>
 
+    <div matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef class="col">Type</mat-header-cell>
+      <mat-cell *matCellDef="let room" class="col"> {{room.type}} </mat-cell>
+    </div>
+
     <div matColumnDef="count">
       <mat-header-cell *matHeaderCellDef class="col">Player count</mat-header-cell>
       <mat-cell *matCellDef="let room" class="col"> {{room.players.length}} / 2 </mat-cell>
@@ -17,7 +22,7 @@
         </button>
       </mat-header-cell>
       <mat-cell *matCellDef="let room" class="actionCol">
-        <button mat-icon-button color="primary" [disabled]="isJoinDisabled(room)" (click)="joinGame(room.name)">
+        <button mat-icon-button color="primary" [disabled]="isJoinDisabled(room)" (click)="joinGame(room)">
           <mat-icon>play_arrow</mat-icon>
         </button>
       </mat-cell>

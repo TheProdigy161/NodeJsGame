@@ -4,6 +4,13 @@
       <mat-label>Game Code</mat-label>
       <input matInput autofocus autocomplete="off" placeholder="e.g ABCDEF" formControlName="gameCode" (keypress)="checkContent($event)" required>
     </mat-form-field>
+    <mat-form-field>
+      <!-- <mat-label>Type</mat-label> -->
+      <mat-select formControlName="type">
+        <mat-option value="tic-tac-toe">Tic-Tac-Toe</mat-option>
+        <mat-option value="rock-paper-scissors">Rock-Paper-Scissors</mat-option>
+      </mat-select>
+    </mat-form-field>
     <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Join</button>
   </form>
 </div>

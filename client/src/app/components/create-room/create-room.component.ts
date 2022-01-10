@@ -1,3 +1,5 @@
+import { GameService } from 'src/app/services/game.service';
+import { Room } from 'src/app/models/room';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,19 +11,22 @@ import { Router } from '@angular/router';
 })
 export class CreateRoomComponent implements OnInit {
   form: FormGroup = new FormGroup({
-    gameCode: new FormControl('', Validators.required)
+    gameCode: new FormControl('', Validators.required),
+    type: new FormControl('', Validators.required)
   });
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private gameService: GameService) { }
 
   ngOnInit(): void {
   }
 
   submit(): void {
     const gameCode: string | null = this.form.get('gameCode')?.value;
+    const type: string | null = this.form.get('type')?.value;
 
-    if (gameCode != null) {
-      this.router.navigate(['game', gameCode.toUpperCase()]);
+    if (gameCode != null && type != null) {
+      this.gameService.setRoom(new Room(gameCode, type));
+      this.router.navigateByUrl('game/play');
     }
   }
 

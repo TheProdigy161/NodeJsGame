@@ -9,7 +9,7 @@ import { GameService } from 'src/app/services/game.service';
   styleUrls: ['./room-list.component.scss']
 })
 export class RoomListComponent implements OnInit {
-  displayedColumns: string[] = [ 'name', 'count', 'action'];
+  displayedColumns: string[] = [ 'name', 'count', 'type', 'action'];
   gameList: Room[] = [];
 
   constructor(private gameService: GameService, private router: Router) { }
@@ -26,8 +26,9 @@ export class RoomListComponent implements OnInit {
     this.router.navigate(['game/createGame']);
   }
 
-  joinGame(gameCode: string): void {
-    this.router.navigate(['game', gameCode.toUpperCase()]);
+  joinGame(room: Room): void {
+    this.gameService.setRoom(room);
+    this.router.navigateByUrl('game/play');
   }
 
   isJoinDisabled(room: Room): boolean {

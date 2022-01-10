@@ -7,7 +7,7 @@ import { RoomListComponent } from './components/game/room-list.component';
 const routes: Routes = [
   { path: 'game', component: RoomListComponent },
   { path: 'game/createGame', component: CreateRoomComponent },
-  { path: 'game/:gameCode', component: TicTacToeOnlineComponent },
+  { path: 'game/play', component: TicTacToeOnlineComponent },
   { path: '**', redirectTo: 'game' },
 ];
 

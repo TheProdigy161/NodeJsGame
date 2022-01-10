@@ -7,14 +7,20 @@ import { Room } from '../models/room';
   providedIn: 'root'
 })
 export class GameService {
+  private room: Room;
+
   constructor(public socket: Socket) { }
 
-  joinGame(gameCode: string): boolean {
-    if (gameCode == null)
+  setRoom(room: Room): void {
+    this.room = room;
+  }
+
+  joinGame(): boolean {
+    if (this.room == null)
       return false;
 
     this.socket.connect();
-    this.socket.emit('join-game', gameCode);
+    this.socket.emit('join-game', this.room);
 
     return true;
   }
