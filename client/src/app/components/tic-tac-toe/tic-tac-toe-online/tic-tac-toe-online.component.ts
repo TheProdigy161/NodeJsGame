@@ -65,7 +65,7 @@ export class TicTacToeOnlineComponent implements OnInit {
       this.isLoading = false;
     });
 
-    this.gameService.socket.on('make-client-move', (data: Move) => {
+    this.gameService.socket.on('tic-tac-toe-make-client-move', (data: Move) => {
       console.log("Making move.");
       // Update board when move is made.
       this.updateBoard(data.x, data.y);

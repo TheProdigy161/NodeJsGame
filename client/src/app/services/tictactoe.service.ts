@@ -10,6 +10,6 @@ export class TicTacToeService {
   constructor(public socket: Socket) { }
 
   makeMove(moveData: MoveData): void {
-    this.socket.emit('make-move', moveData);
+    this.socket.emit('tic-tac-toe-make-move', moveData);
   }
 }
