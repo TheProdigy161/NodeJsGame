@@ -1,6 +1,6 @@
 import { Server } from 'socket.io';
-import { Player } from 'src/models/player';
-import { GenerateRandomName } from 'src/nameRandomizer';
+import { Player } from '../models/player';
+import { GenerateRandomName } from '../nameRandomizer';
 import { DummyDb } from '../dummyDb';
 import game from './game';
 import tictactoe from './tictactoe';

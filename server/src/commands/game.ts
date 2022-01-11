@@ -1,5 +1,5 @@
 import { Server, Socket } from 'socket.io';
-import { Room } from 'src/models/room';
+import { Room } from '../models/room';
 import { DummyDb } from '../dummyDb';
 
 export default function (server: Server, db: DummyDb, username: string): void {
