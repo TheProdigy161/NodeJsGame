@@ -11,6 +11,10 @@ export class GameService {
 
   constructor(public socket: Socket) { }
 
+  getRoom(): Room {
+    return this.room;
+  }
+
   setRoom(room: Room): void {
     this.room = room;
   }
