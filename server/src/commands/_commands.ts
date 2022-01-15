@@ -11,7 +11,7 @@ export default function(server: Server, db: DummyDb): void {
         console.log(`User connected - ${newName}`);
         db.addPlayer(new Player(socket.id, newName));
         
-        game(server, db, newName);
-        tictactoe(server, socket, db);
+        game(server, socket, db, newName);
+        tictactoe(server, socket, db, newName);
     });
 }

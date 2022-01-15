@@ -11,7 +11,7 @@ export class DummyDb {
         if (this.rooms.findIndex(x => x.name === room.name) === -1)      
             this.rooms.push(room);
 
-        console.log(`Finished adding room ${room.name}`);
+        console.log(`Finished adding room ${room.name}, Rooms count: ${this.rooms.length}, Players count: ${this.players.length}`);
     }
 
     // Adds a player to the db.
@@ -19,22 +19,21 @@ export class DummyDb {
         console.log(`Adding player ${newPlayer.name}`);
         let response: string = 'Player has been added.';
 
-        if (this.players.findIndex(x => x.id === newPlayer.id) === -1)
-            this.players.push(newPlayer);
-
         if (this.players.findIndex(x => x.name === newPlayer.name) === -1)
             this.players.push(newPlayer);
         else
             response = 'Player name is already taken.';
-            
+
         console.log(`Finished adding player ${newPlayer.name}`);
+        console.log(`Players count: ${this.players.length}`);
+        
         return response;
     }
 
     // Adds a player to the room.
-    addPlayerToRoom(playerId: string, roomName: string) {
-        console.log(`Adding player ${playerId} to room`);
-        const foundPlayer: Player | null = this.players.find(x => x.id === playerId) ?? null;
+    addPlayerToRoom(name: string, roomName: string) {
+        console.log(`Adding player ${name} to room`);
+        const foundPlayer: Player | null = this.players.find(x => x.name === name) ?? null;
 
         if (foundPlayer === null)
             return;
@@ -44,18 +43,19 @@ export class DummyDb {
         if (foundRoomIndex !== -1)
             this.rooms[foundRoomIndex].players.push(foundPlayer);
 
-        console.log(`Finished adding player ${playerId} to room`);
+        console.log(`Finished adding player ${name} to room}`);
+		console.log(`Players count: ${this.rooms[foundRoomIndex].players.length}`);
     }
 
     // Removes a player by its id.
-    removePlayer(playerId: string) {
-        console.log(`Removing player ${playerId}`);
+    removePlayer(name: string) {
+        console.log(`Removing player ${name}`);
         // Remove player from room.
-        const foundRoom: Room | null = this.rooms.find(x => x.players.map(x => x.id).includes(playerId)) ?? null;
+        const foundRoom: Room | null = this.rooms.find(x => x.players.map(x => x.name).includes(name)) ?? null;
         
         if (foundRoom !== null) {
             const foundRoomIndex: number = this.rooms.findIndex(x => x.name === foundRoom.name);
-            const playerIndex: number = foundRoom.players.findIndex(x => x.id === playerId);
+            const playerIndex: number = foundRoom.players.findIndex(x => x.name === name);
 
             if (playerIndex !== -1)
                 foundRoom.players.splice(playerIndex, 1);
@@ -69,12 +69,12 @@ export class DummyDb {
         }
         
         // Remove player.
-        const foundPlayerIndex: number = this.players.findIndex(x => x.id === playerId);
+        const foundPlayerIndex: number = this.players.findIndex(x => x.name === name);
         
         if (foundPlayerIndex !== - 1)
             this.players.splice(foundPlayerIndex, 1);
 
-        console.log(`Finished removing player ${playerId}`);
+        console.log(`Finished removing player ${name}, Player count: ${foundRoom?.players.length ?? 0}`);
     }
 
     // Gets all rooms currently stored in the db.

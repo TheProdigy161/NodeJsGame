@@ -2,16 +2,14 @@ import { Server, Socket } from 'socket.io';
 import { Room } from '../models/room';
 import { DummyDb } from '../dummyDb';
 
-export default function (server: Server, db: DummyDb, username: string): void {
-    server.on('connection', (socket) => {
-        joinGame(server, socket, db);
-        getGameList(server, socket, db);
-        playerDisconnects(socket, db, username);
-    });
+export default function (server: Server, socket: Socket, db: DummyDb, username: string): void {
+    joinGame(server, socket, db, username);
+    getGameList(server, socket, db);
+    playerDisconnects(socket, db, username);
 }
 
 // Join a game room.
-function joinGame(server: Server, socket: Socket, db: DummyDb) {
+function joinGame(server: Server, socket: Socket, db: DummyDb, username: string) {
     socket.on('join-game', async (room: Room) => {
         console.log(`Join game called - ${room}, on socket ${socket.id}`);
         // Get number of sockets in room;
@@ -25,7 +23,7 @@ function joinGame(server: Server, socket: Socket, db: DummyDb) {
             await socket.emit('join-room-success', sockets.length === 0);
 
             db.addRoom(new Room(room.name, room.type));
-            db.addPlayerToRoom(socket.id, room.name);
+            db.addPlayerToRoom(username, room.name);
         } else {
             await socket.emit('join-room-failed', null);
         }
@@ -50,6 +48,6 @@ function getGameList(server: Server, socket: Socket, db: DummyDb) {
 function playerDisconnects(socket: Socket, db: DummyDb, username: string) {
     socket.on('disconnect', () => {
         console.log(`User disconnected - ${username}`);
-        db.removePlayer(socket.id);
+        db.removePlayer(username);
     });
 }
